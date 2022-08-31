@@ -1,3 +1,11 @@
+$header-height: 40px;
+$header-height-tablet: 70px;
+$header-height-desktop: 95px;
+
+$form-height: 140px;
+$form-height-tablet: 150px;
+$form-height-desktop: 175px;
+
 body {
   background: #efefef;
 }
@@ -6,7 +14,7 @@ body {
   padding: 1rem;
   text-align: center;
   background: white;
-  height: calc(100vh - 2rem);
+  min-height: calc(100vh - 2rem);
   font-size: 16px;
   & .title {
     font-size: 30px;
@@ -14,10 +22,13 @@ body {
   & .list {
     border: 1px solid #dcdcdc;
     border-radius: 5px;
-    width: 500px;
-    padding: 1rem 2rem;
+    max-width: 500px;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
     margin: 0 auto;
     list-style-type: number;
+    max-height: calc(100vh - $header-height - $form-height - 10rem);
+    overflow: auto;
     & .item {
       padding: 0.5rem;
       & span {
@@ -34,15 +45,19 @@ body {
   }
 
   & form {
-    width: 500px;
+    width: min( 100%, 500px );
     margin: 1rem auto;
     & input {
       margin-top: 1rem;
       padding: 0.5rem;
-      width: 250px;
+      width: min( calc(100% - 1rem), 250px );
     }
     & input[type="submit"] {
       cursor: pointer;
+    }
+    & .error_message { 
+      color: red;
+      font-weight: bold;
     }
   }
 }
@@ -54,8 +69,8 @@ body {
       font-size: 50px;
     }
     & .list {
-      & .item {
-      }
+      padding-left: 4rem;
+      max-height: calc(100vh - $header-height-tablet - $form-height-tablet - 10rem);
     }
   }
 }
@@ -64,13 +79,12 @@ body {
   .container {
     max-width: 1440px;
     margin: 0 auto;
+    font-size: 30px;
     & .title {
-      font-size: 50px;
+      font-size: 70px;
     }
     & .list {
-      & .item {
-        font-size: 20px;
-      }
+      max-height: calc(100vh - $header-height-desktop - $form-height-desktop - 14rem);
     }
   }
 }

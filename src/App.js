@@ -3,6 +3,7 @@ import React, { useState, useRef } from 'react';
 
 export default function App() {
   const [ todo, setTodo ] = useState( [] );
+  const [ showErrorMessage, setShowErrorMessage ] = useState( false );
   const inputRef = useRef();
 
   const handleAdd = e => {
@@ -11,9 +12,12 @@ export default function App() {
     if ( toAdd ) {
       const value = toAdd.value;
       if ( value && value.length ) {
+        setShowErrorMessage( false );
         const item = { text: value, done: false };
         setTodo( previousToDo => { return previousToDo.concat( item ) } );
         inputRef.current.value = '';
+      } else {
+        setShowErrorMessage( true );
       }
     }
   }
@@ -27,6 +31,9 @@ export default function App() {
         <input type="text" name="toAdd" placeholder="Something to do..." ref={ inputRef } />
         <br />
         <input type="submit" value="Add Item" />
+        {
+          showErrorMessage ? <p className="error_message">Input cannot be empty.</p> : null
+        }
       </form>
     </div>
   );
